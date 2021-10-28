@@ -13,3 +13,26 @@ log.info "Fail"
 } 
 
 //if the output is 48 in the response it will give the output as pass
+
+
+//another method
+
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+def holder = groovyUtils.getXmlHolder(messageExchange.responseContent)
+
+holder.declareNamespace("ns1","http://tempuri.org/")
+
+
+
+def addResult = holder.getNodeValue("//ns1:AddResult")
+
+log.info "Result is :" + addResult
+
+if(addResult=="48")
+{
+log.info "Pass"
+}
+else
+{
+log.info "Fail"
+}
